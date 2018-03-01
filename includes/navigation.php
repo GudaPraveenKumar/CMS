@@ -22,10 +22,11 @@
                         echo "<li><a href='#'>$category_title</a></li>";
                     }
                 ?>
-<!--
-                <li>
-                    <a href="#">About</a>
+                 <li>
+                    <a href="admin">Admin</a>
                 </li>
+<!--
+               
                 <li>
                     <a href="#">Services</a>
                 </li>

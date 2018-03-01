@@ -14,23 +14,26 @@
                     Page Heading
                     <small>Secondary Text</small>
                 </h1>
-
+                
+                 
                 <!-- First Blog Post -->
                 <?php
-                
-                    $post_query = "select * from posts";
-                  
-                    $post_results = mysqli_query($connection, $post_query);
-                    if(mysqli_num_rows($post_results) > 0){
-                        
-                   
-                        while($row = mysqli_fetch_assoc($post_results)){
-                            
-                            $post_title = $row['title'];
-                            $post_author = $row['author'];
-                            $post_date = $row['date'];
-                            $post_content = $row['content'];
-                            $post_image = $row['image'];
+                    if(isset($_POST['searchsubmit'])){
+                        $searchVal = $_POST['searchVal'];
+            
+                        $query = "select * from posts where tags like '%$searchVal%'";
+            
+                        $results = mysqli_query($connection, $query);
+            
+           
+                        if(mysqli_num_rows($results)){
+                            while($row = mysqli_fetch_assoc($results)){
+                                
+                                $post_title = $row['title'];
+                                $post_author = $row['author'];
+                                $post_date = $row['date'];
+                                $post_content = $row['content'];
+                                $post_image = $row['image'];
                 ?>
                 <h2>
                     <a href="#"><?php echo $post_title ?></a>
@@ -47,7 +50,11 @@
 
                 <hr>
                 <?php
-                     }
+                           
+                            }
+                     }else{
+                            echo "<h3>No results found</h3>";
+                        }
                 }
                 
                 ?>
