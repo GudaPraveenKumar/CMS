@@ -11,7 +11,7 @@
         $tags = $_POST['tags'];
         $content = $_POST['content'];
         $date = date('d-m-y');
-        $comment_count = 4;
+        $comment_count = 0;
         
         move_uploaded_file($image_temp, "../images/$image");
         

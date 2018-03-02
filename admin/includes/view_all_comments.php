@@ -24,6 +24,26 @@
             check_query_execution($delete_comment_result);
             
         }
+    
+        if(isset($_GET['approve_comment'])){
+            $comment_id = $_GET['c_id'];
+            $approve_comment_query = "Update comments set comment_status = 'approved' where comment_id = {$comment_id}";
+            
+            $approve_comment_result = mysqli_query($connection, $approve_comment_query);
+            
+            check_query_execution($approve_comment_result);
+            
+        }
+    
+        if(isset($_GET['unapprove_comment'])){
+            $comment_id = $_GET['c_id'];
+            $approve_comment_query = "Update comments set comment_status = 'unapproved' where comment_id = {$comment_id}";
+            
+            $approve_comment_result = mysqli_query($connection, $approve_comment_query);
+            
+            check_query_execution($approve_comment_result);
+            
+        }
         
         ?>
     <tbody>
@@ -62,8 +82,8 @@
                     
                     echo "<td>{$comment_date}</td>";
 
-                    echo "<td><div><a href='view_all_comments.php?source=approve_comment&c_id={$comment_id}'>Approve</a></div></td>";
-                    echo "<td><div><a href='view_all_comments.php?source=unapprove_comment&c_id={$comment_id}'>Unapprove</a></div></td>";
+                    echo "<td><div><a href='comments.php?approve_comment&c_id={$comment_id}'>Approve</a></div></td>";
+                    echo "<td><div><a href='comments.php?unapprove_comment&c_id={$comment_id}'>Unapprove</a></div></td>";
                     echo "<td><div><a href='comments.php?delete_comment&c_id={$comment_id}'>Delete</a></div></td>";
                     echo "<tr>";
 
