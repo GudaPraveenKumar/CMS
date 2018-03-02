@@ -11,16 +11,26 @@
             <div class="col-md-8">
 
                 <h1 class="page-header">
-                    Page Heading
+                    Category Posts
                     <small>Secondary Text</small>
                 </h1>
 
                 <!-- First Blog Post -->
                 <?php
                 
-                    $post_query = "select * from posts";
-                  
+                if(isset($_GET['category'])){
+                    
+                    $cat_id = $_GET['category'];
+                    
+                }
+                
+                    $post_query = "select * from posts where category_id = {$cat_id}";
+                    
                     $post_results = mysqli_query($connection, $post_query);
+                    
+                    if(!$post_results){
+                        die("Query Failed". mysqli_error($connection));
+                    }
                     if(mysqli_num_rows($post_results) > 0){
                         
                    
@@ -29,7 +39,7 @@
                             $post_title = $row['title'];
                             $post_author = $row['author'];
                             $post_date = $row['date'];
-                            $post_content = substr($row['content'], 0, 150);
+                           $post_content = substr($row['content'], 0, 150);
                             $post_image = $row['image'];
                 ?>
                 <h2>
@@ -40,8 +50,9 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
                 <hr>
-                 <a href="post.php?p_id=<?php echo $post_id; ?>">
-                <img class="img-responsive" src="images/<?php echo $post_image?>" alt=""></a>
+                <a href="post.php?p_id=<?php echo $post_id; ?>">
+                <img class="img-responsive" src="images/<?php echo $post_image?>" alt="">
+                </a>
                 <hr>
                 <p><?php echo $post_content ?></p>
                 <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -49,21 +60,12 @@
                 <hr>
                 <?php
                      }
-                }
+                }else{
+                        echo "<h3>No posts found with this category.</h3>";
+                    }
                 
                 ?>
-               
-               
-
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
+                
 
             </div>
 

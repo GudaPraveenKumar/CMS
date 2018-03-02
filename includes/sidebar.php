@@ -22,7 +22,7 @@
         <h4>Blog Categories</h4>
         
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <ul class="list-unstyled">
 <!--                    // ------------------------- Getting the list of categories -------------->
                      <?php
@@ -30,26 +30,15 @@
                         $results = mysqli_query($connection, $query);
                         if(mysqli_num_rows($results) > 0){
                             while($row = mysqli_fetch_assoc($results)){
-                                echo "<li><a href='#'>{$row['cat_title']}</a></li>";
+                                $cat_title = $row['cat_title'];
+                                $cat_id = $row['cat_id'];
+                                echo "<li><a href='category_posts.php?category={$cat_id}'>{$cat_title}</a></li>";
                             }
                         }
                     ?>  
                 </ul>
             </div>
-            <!-- /.col-lg-6 -->
-            <div class="col-lg-6">
-                <ul class="list-unstyled">
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                    <li><a href="#">Category Name</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.col-lg-6 -->
+            
         </div>
     <!-- /.row -->
     </div>

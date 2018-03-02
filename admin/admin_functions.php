@@ -1,5 +1,13 @@
 <?php
 
+function check_query_execution($query_result){
+    global $connection;
+    
+    if(!$query_result){
+        echo "Query Failed". mysqli_error($connection);
+    }
+}
+
 function create_category(){
     global $connection;
     if(isset($_POST['createCategory'])){
