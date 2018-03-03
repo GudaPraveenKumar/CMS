@@ -35,8 +35,19 @@ if(isset($_POST['update_post'])){
     $result = mysqli_query($connection, $query);
 
     check_query_execution($result);
+    
+    
+    ?>
 
-}
+<div class="alert alert-success alert-dismissible fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Success!</strong> Edited post successfully!
+  </div>
+
+<?php
+        
+    }
+
 
 $query = "select * from posts where id = {$post_id}";
     $result = mysqli_query($connection, $query);
@@ -96,10 +107,23 @@ $query = "select * from posts where id = {$post_id}";
         <input type="text" value="<?php echo $post_author; ?>" name="author" class="form-control">
     </div>
     
-    <div class="form-group">
-        <label for="status">Post Status</label>
-        <input type="text" value="<?php echo $post_status; ?>" name="status" class="form-control">
-    </div>
+    
+    <label for="status">Post Status </label>
+    <select name="status">
+    
+            <option value="<?php echo $post_status; ?>"><?php echo $post_status; ?></option>
+            <?php
+                if($post_status == 'Published'){
+                    echo "<option value='Draft'>Draft</option>";
+                }
+            ?>
+            <?php
+                if($post_status == 'Draft'){
+                    echo "<option value='Published'>Published</option>";
+                }
+            ?>
+        
+    </select>
     
     <div class="form-group">
         <img width="100" src="../images/<?php echo $post_image; ?>" />

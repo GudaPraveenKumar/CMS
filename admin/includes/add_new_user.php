@@ -18,6 +18,15 @@
         $create_user_result = mysqli_query($connection, $create_user_query);
         
         check_query_execution($create_user_result);
+?>
+
+<div class="alert alert-success alert-dismissible fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Success!</strong> User has been created!
+  </div>
+
+<?php
+        
     }
 
 ?>

@@ -1,6 +1,65 @@
+<?php
+
+if(isset($_POST['checkBoxArray'])){
+    
+    foreach($_POST['checkBoxArray'] as $post_id){
+        $bulk_options = $_POST['bulk_options'];
+        
+        switch($bulk_options){
+            case 'Published':
+                $bulk_publish_query = "UPDATE posts SET status = '{$bulk_options}' WHERE id = {$post_id}";
+                $bulk_publish_result = mysqli_query($connection, $bulk_publish_query);
+                if(!$bulk_publish_result){
+                    die("Query Failed". mysqli_error($connection));
+                }
+                break;
+            
+            case 'Draft':
+                $bulk_draft_query = "UPDATE posts SET status = '{$bulk_options}' WHERE id = {$post_id}";
+                $bulk_draft_result = mysqli_query($connection, $bulk_draft_query);
+                if(!$bulk_draft_result){
+                    die("Query Failed". mysqli_error($connection));
+                }
+                break;
+            
+            case 'Delete':
+                $bulk_delete_query = "DELETE FROM posts WHERE id = {$post_id}";
+                $bulk_delete_result = mysqli_query($connection, $bulk_delete_query);
+                if(!$bulk_delete_result){
+                    die("Query Failed". mysqli_error($connection));
+                }
+                break;
+            default:
+                echo "";
+        }
+        
+    }
+    
+}
+
+?>
+
+<form method="post" action="">
+
 <table class="table table-bordered table-hover">
+    
+    <div id="bulkOptionContainer" class="col-xs-4">
+        <select class="form-control" name="bulk_options" id="">
+            <option value="">Select Options</option>
+            <option value="Published">Publish</option>
+            <option value="Draft">Draft</option>
+            <option value="Delete">Delete</option>
+            
+        </select>
+    </div>
+    <div class="col-xs-4">
+   
+        <input type="submit" name="submit" class="btn btn-success" value="Apply">
+        <a class="btn btn-primary" href="add_new_post.php">Add New Post</a>
+    </div><br>
     <thead>
         <tr>
+            <th><input id="selectAllBoxes" type="checkbox"></th>
             <th>Id</th>
             <th>Author</th>
             <th>Title</th>
@@ -18,7 +77,7 @@
         <?php 
             $query = "select * from posts";
             $result = mysqli_query($connection, $query);
-            
+            $posts_count = mysqli_num_rows($result);
             while($row = mysqli_fetch_assoc($result)){
                 
                     $post_id = $row['id'];
@@ -32,6 +91,7 @@
                     $post_date = $row['date'];
 
                     echo "<tr>";
+                    echo "<td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='{$post_id}'></td>";
                     echo "<td>{$post_id}</td>";
                     echo "<td>{$post_author}</td>";
                     echo "<td><a href='../post.php?p_id={$post_id}'>{$post_title}</a></td>";
@@ -76,3 +136,4 @@
 
     </tbody>
 </table>
+    </form>

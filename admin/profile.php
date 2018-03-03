@@ -1,8 +1,19 @@
+<?php include "includes/admin_header.php"; ?>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+    <?php include "includes/admin_navigation.php"; ?>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+                
 <?php 
-    
-    if(isset($_GET['user_id'])){
-        $user_id = $_GET['user_id'];
-        
+
+    if(isset($_SESSION['user_id'])){
+        $user_id = $_SESSION['user_id'];
+
     }
 
 ?>
@@ -31,7 +42,7 @@
 ?>
 
 <?php 
-    if(isset($_POST['updateUser'])){
+    if(isset($_POST['updateProfile'])){
        
         $username = $_POST['username'];
         $user_password = $_POST['user_password'];
@@ -62,21 +73,16 @@
         $update_user_result = mysqli_query($connection, $update_user_query);
         
         check_query_execution($update_user_result);
-    ?>
-
-<div class="alert alert-success alert-dismissible fade in">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Success!</strong> User details edited successfully!
-  </div>
-
-<?php
         
     }
+
+?>
+
 
 
 <form action="" method="post" enctype="multipart/form-data">
     
-    <h3>Edit User</h3>
+    <h3>Profile</h3>
     
     <div class="form-group">
         <label for="firstname">First Name</label>
@@ -127,7 +133,19 @@
 
     
     <div class="form-group">
-        <input type="submit" class="btn btn-primary" value="Update" name="updateUser">
+        <input type="submit" class="btn btn-primary" value="Update Profile" name="updateProfile">
      </div>
 
 </form>
+               
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <?php include "includes/admin_footer.php"; ?>

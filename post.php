@@ -115,7 +115,7 @@
                 
                 <?php
                     $post_id = $_GET['p_id'];
-                
+                    
                     $get_all_comments_query = "select * from comments where comment_post_id = {$post_id} AND comment_status = 'approved' ORDER BY comment_id DESC";
                     
                     $get_all_comments_result = mysqli_query($connection, $get_all_comments_query);
