@@ -19,8 +19,14 @@
         
         $result = mysqli_query($connection, $query);
         
-        check_query_execution($result);
         
+        check_query_execution($result);
+        if(!$result){
+            
+        }else{
+            
+       
+       
    ?>
 
 <div class="alert alert-success alert-dismissible fade in">
@@ -29,6 +35,7 @@
   </div>
 
 <?php
+         }     
         
     }
 
@@ -40,7 +47,7 @@
     
     <div class="form-group">
         <label for="title">Post Title</label>
-        <input type="text" name="title" class="form-control">
+        <input type="text" required name="title" class="form-control">
     </div>
     
     <div class="form-group">
@@ -66,27 +73,36 @@
     
     <div class="form-group">
         <label for="author">Post Author</label>
-        <input type="text" name="author" class="form-control">
+        <input type="text" required="true" name="author" class="form-control">
     </div>
     
     <div class="form-group">
         <label for="status">Post Status</label>
-        <input type="text" name="status" class="form-control">
+        
+        <select name="status" required="true">
+            <option value="">Select Status</option>
+            <option value="Published">Publish</option>
+            <option value="Draft">Draft</option>
+        
+        </select>
+        
     </div>
+    
+    
     
     <div class="form-group">
         <label for="image">Post Image</label>
-        <input type="file" name="image">
+        <input type="file" required name="image">
     </div>
     
     <div class="form-group">
         <label for="tags">Post Tags</label>
-        <input type="text" name="tags" class="form-control">
+        <input type="text" required name="tags" class="form-control">
     </div>
     
     <div class="form-group">
         <label for="content">Post Cotents</label>
-        <textarea class="form-control" name="content" id="" cols="25" row="10"></textarea>
+        <textarea class="form-control" required="true" name="content" id="" cols="25" row="10"></textarea>
         
     </div>
     
