@@ -24,7 +24,7 @@
         
         
         if(!$login_result){
-            die("Query Failed". mysqli_error($connection));
+            die("Query Failed for login". mysqli_error($connection));
         }
         if(mysqli_num_rows($login_result) == 1){
             while($row = mysqli_fetch_assoc($login_result)){
